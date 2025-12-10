@@ -1,0 +1,46 @@
+[package]
+name = "skill-ed"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.70"
+authors = ["Skill-ED Team"]
+description = "Privacy-focused, open-source skill management platform with end-to-end encryption"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/skill-ed/skill-ed"
+
+[dependencies]
+tauri = { version = "1.5", features = ["fs-read-dir", "fs-copy-file", "fs-remove-file", "fs-rename-file", "http-client", "os-all", "shell-open", "system-tray", "updater"] }
+tauri-plugin-single-instance = "0.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "sqlite"] }
+tokio = { version = "1.35", features = ["full"] }
+chacha20poly1305 = "0.10"
+argon2 = "0.5"
+rand = "0.8"
+sha2 = "0.10"
+hex = "0.4"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.6", features = ["v4", "serde"] }
+anyhow = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.11"
+lazy_static = "1.4"
+parking_lot = "0.12"
+
+[dev-dependencies]
+serial_test = "3.0"
+
+[build-dependencies]
+tauri-build = "1.5"
+
+[[bin]]
+name = "skill-ed"
+path = "src-tauri/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
